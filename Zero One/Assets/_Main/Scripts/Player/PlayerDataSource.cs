@@ -25,4 +25,9 @@ namespace ZeroOne
         IObservable<Unit> IJumpEventsSource.OnJumpObservable => _playerInputSource.OnJumpObservable;
         IObservable<Unit> IJumpEventsSource.OnReleaseJumpObservable => _playerInputSource.OnReleaseJumpObservable;
     }
+
+    public partial class PlayerDataSource : IAimEventsSource
+    {
+        IObservable<Vector2> IAimEventsSource.OnAimObservable => _playerInputSource.OnAimObservable;
+    }
 }

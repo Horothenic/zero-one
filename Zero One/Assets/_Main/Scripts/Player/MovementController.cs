@@ -54,12 +54,14 @@ namespace ZeroOne
             _disposables.Dispose();
         }
 
-        private void Move(Vector3 direction)
+        private void Move(Vector3 inputDirection)
         {
-            direction.x *= _sideSpeed;
-            direction.z *= direction.z < 0 ? _backwardSpeed : _frontalSpeed;
+            inputDirection.x *= _sideSpeed;
+            inputDirection.z *= inputDirection.z < 0 ? _backwardSpeed : _frontalSpeed;
 
-            var newPosition = _rigidbody.position + direction * Time.fixedDeltaTime;
+            Vector3 realDirection = Quaternion.AngleAxis(transform.eulerAngles.y, Vector3.up) * inputDirection;
+
+            var newPosition = _rigidbody.position + realDirection * Time.fixedDeltaTime;
             _rigidbody.MovePosition(newPosition);
         }
 
